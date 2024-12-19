@@ -36,7 +36,7 @@ void Point::capture()
 
 code Point::isValidMove(Point p1, Point p2) const
 {
-	return _piece.isValidMove(p1, p2);
+	//return _piece.isValidMove(p1, p2);
 }
 
 bool Point::getColor() const
