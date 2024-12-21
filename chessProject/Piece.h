@@ -1,10 +1,11 @@
 #pragma once
 #include "point.h"
+#include "Board.h"
 #include <vector>
 
 class Piece
 {
-private:
+protected:
 	char _type;
 	bool _color;
 	Point _point;
@@ -23,8 +24,18 @@ public:
 	void setEmpty();
 
 
-	// Methods
-	code virtual checkMove(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const = 0;
+	// Methods	
+	bool virtual isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const = 0;
+	bool isCheckOnCurrentPlayer(const std::vector<std::vector<Piece*>>& board) const;
+	bool isCheckOnOpponent(const std::vector<std::vector<Piece*>>& board) const;
+	//bool isCheckMate
+
+protected:
+	//helper
+	static bool isCheck(const std::vector<std::vector<Piece*>>& board, bool color);
+	static Piece* locateKing(const std::vector<std::vector<Piece*>>& board, bool color);
+	bool isKing() const;
+	
 
 };
 

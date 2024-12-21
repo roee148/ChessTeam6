@@ -4,9 +4,18 @@ class King : Piece
 {
 public:
 	
-	code checkMove(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const;
-	
-private:
-	Point _source;
-	Point _destination;
+	King(int x, int y, char type, bool color) : Piece(x, y, type, color) 
+	{
+		if (color)
+		{
+			_type = 'K';
+		}
+		else
+		{
+			_type = 'k';
+		}
+	}
+
+	bool isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const override;
+
 };
