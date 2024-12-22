@@ -16,26 +16,19 @@ public:
 
 	// Getters
 	char getType() const;
-	void setType(char type);
 	bool getColor() const;
 	int getX() const;
 	int getY() const;
 	bool isEmpty() const;
-	void setEmpty();
+	void setPoint(int x, int y);
 
 
 	// Methods	
 	bool virtual isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const = 0;
-	bool isCheckOnCurrentPlayer(const std::vector<std::vector<Piece*>>& board) const;
-	bool isCheckOnOpponent(const std::vector<std::vector<Piece*>>& board) const;
-	//bool isCheckMate
+	bool isKing() const;
 
 protected:
-	//helper
-	static bool isCheck(const std::vector<std::vector<Piece*>>& board, bool color);
-	static Piece* locateKing(const std::vector<std::vector<Piece*>>& board, bool color);
-	bool isKing() const;
-	
+	void setType(char type);
 
 };
 

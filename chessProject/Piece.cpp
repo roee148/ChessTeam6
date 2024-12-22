@@ -3,7 +3,9 @@
 #define BOARD_SIZE 8
 
 Piece::Piece(int x, int y, char type, bool color): _point(Point(x, y)), _color(color)
-{}
+{
+	setType(type);
+}
 
 char Piece::getType() const
 {
@@ -12,7 +14,16 @@ char Piece::getType() const
 
 void Piece::setType(char type)
 {
-	_type = type;
+
+
+	if (_color)
+	{
+		_type = (char)toupper(type);
+	}
+	else
+	{
+		_type = (char)tolower(type);
+	}
 }
 
 bool Piece::getColor() const
@@ -35,26 +46,11 @@ bool Piece::isEmpty() const
 	return _type == EMPTY;
 }
 
-void Piece::setEmpty()
+void Piece::setPoint(int x, int y)
 {
-	_type = EMPTY;
+	_point = Point(x, y);
 }
  
-Piece* Piece::locateKing(const std::vector<std::vector<Piece*>>& board, bool color)
-{
-	for (int i = 0; i < BOARD_SIZE; i++)
-	{
-		for (int j = 0; j < BOARD_SIZE; j++)
-		{
-			Piece* tmpPiece = board[i][j];
-			if (tmpPiece->isKing() && color == tmpPiece->getColor())
-			{
-				return tmpPiece;
-			}
-		}
-	}
-}
-
 bool Piece::isKing() const
 {
 	return (char)tolower(_type) == 'k';
@@ -63,35 +59,6 @@ bool Piece::isKing() const
 bool Piece::getColor() const
 {
 	return _color;
-}
-
-bool Piece::isCheckOnCurrentPlayer(const std::vector<std::vector<Piece*>>& board) const
-{
-	return isCheck(board, _color);
-}
-
-bool Piece::isCheckOnOpponent(const std::vector<std::vector<Piece*>>& board) const
-{
-	return isCheck(board, !_color);
-}
-
-bool Piece::isCheck(const std::vector<std::vector<Piece*>>& board, bool color)
-{
-	Piece* king = locateKing(board, color);
-
-	for (int i = 0; i < BOARD_SIZE; i++)
-	{
-		for (int j = 0; j < BOARD_SIZE; j++)
-		{
-			Piece* currPiece = board[i][j];
-			if (color != currPiece->getColor() &&
-				currPiece->isValidMovement(*king, board))
-			{
-				return true;
-			}
-		}
-	}
-	return false;
 }
 
 

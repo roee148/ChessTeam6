@@ -1,20 +1,10 @@
 #pragma once
 #include "Piece.h"
-class King : Piece
+class King : public Piece
 {
 public:
 	
-	King(int x, int y, char type, bool color) : Piece(x, y, type, color) 
-	{
-		if (color)
-		{
-			_type = 'K';
-		}
-		else
-		{
-			_type = 'k';
-		}
-	}
+	King(int x, int y, bool color) : Piece(x, y, 'k', color) {}
 
 	bool isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const override;
 
