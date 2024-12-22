@@ -1,27 +1,17 @@
 #pragma once
 #include <iostream>
-#include "Piece.h"
-
-
 
 class Point
 {
 private:
-	char _x;
-	char _y;
-	Piece* _piece;
+	int _x;
+	int _y;
 
 public:
-	// Constructors
-	Point(char x, char y);
+	// Constructor
+	Point(int x, int y);
 	// Getters
-	char getX() const;
-	char getY() const;
-	bool getColor() const;
-	// Methods
-	bool isEmpty() const;
-	void capture();
-	code isValidMove(Point p1, Point p2) const;
-	
-};
+	int getX() const;
+	int getY() const;
 
+};

@@ -1,25 +1,30 @@
 #pragma once
 #include "point.h"
+#include <vector>
 
 class Piece
 {
-private:
+protected:
 	char _type;
 	bool _color;
+	Point _point;
 
 public:
 	// Constructors
-	Piece(char type, bool color);
-
+	Piece(int x, int y, char type, bool color);
 
 	// Getters
 	char getType() const;
-	void setType(char type) const;
+	void setType(char type);
 	bool getColor() const;
+	int getX() const;
+	int getY() const;
+	bool isEmpty() const;
+	void setEmpty();
+
 
 	// Methods
-	code virtual isValidMove(Point p , bool) const = 0;
-
+	bool virtual isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const = 0;
 };
 
 enum code
