@@ -33,6 +33,12 @@
     <ClInclude Include="King.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Rook.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EmptyPiece.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -51,6 +57,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="point.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="King.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Rook.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

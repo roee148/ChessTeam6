@@ -127,18 +127,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="EmptyPiece.h" />
     <ClInclude Include="King.h" />
     <ClInclude Include="Piece.h" />
     <ClInclude Include="Pipe.h" />
     <ClInclude Include="point.h" />
+    <ClInclude Include="Rook.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Board.h" />
+    <ClCompile Include="King.cpp" />
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="point.cpp" />
+    <ClCompile Include="Rook.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>

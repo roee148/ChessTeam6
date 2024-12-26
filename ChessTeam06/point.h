@@ -13,5 +13,6 @@ public:
 	// Getters
 	int getX() const;
 	int getY() const;
-
+	
 };
+
