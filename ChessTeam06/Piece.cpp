@@ -1,6 +1,5 @@
 #include "Piece.h"
 #define EMPTY '#'
-#define BOARD_SIZE 8
 
 Piece::Piece(int x, int y, char type, bool color): _point(Point(x, y)), _color(color)
 {
