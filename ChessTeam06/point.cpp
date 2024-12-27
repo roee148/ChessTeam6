@@ -12,3 +12,5 @@ int Point::getY() const
 {
 	return _y;
 }
+
+

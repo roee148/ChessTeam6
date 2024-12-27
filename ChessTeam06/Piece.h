@@ -15,23 +15,27 @@ public:
 
 	// Getters
 	char getType() const;
-	void setType(char type);
 	bool getColor() const;
 	int getX() const;
 	int getY() const;
 	bool isEmpty() const;
-	void setEmpty();
+	void setPoint(int x, int y);
 
 
-	// Methods
+	// Methods	
 	bool virtual isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const = 0;
+	bool isKing() const;
+
+protected:
+	void setType(char type);
+
 };
 
 enum code
 {
 	VALID,
 	CHECK,
-	EMPTY_SOURCE_POINT,
+	EMPTY_SOURCE_POINT, //source point is empty/the piece in the source point is the oponent's piece
 	OCCUPIED_DEST_POINT,
 	CHECK_ON_CURRENT_PLAYER,
 	INVALID_INDEXES,

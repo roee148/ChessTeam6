@@ -1,8 +1,10 @@
 #include "Piece.h"
 #define EMPTY '#'
 
-Piece::Piece(int x, int y, char type, bool color) : _point(Point(x, y)), _color(color)
-{}
+Piece::Piece(int x, int y, char type, bool color): _point(Point(x, y)), _color(color)
+{
+	setType(type);
+}
 
 char Piece::getType() const
 {
@@ -11,7 +13,14 @@ char Piece::getType() const
 
 void Piece::setType(char type)
 {
-	_type = type;
+	if (_color)
+	{
+		_type = (char)toupper(type);
+	}
+	else
+	{
+		_type = (char)tolower(type);
+	}
 }
 
 bool Piece::getColor() const
@@ -34,12 +43,12 @@ bool Piece::isEmpty() const
 	return _type == EMPTY;
 }
 
-void Piece::setEmpty()
+void Piece::setPoint(int x, int y)
 {
-	_type = EMPTY;
+	_point = Point(x, y);
 }
-
-bool Piece::getColor() const
+ 
+bool Piece::isKing() const
 {
-	return _color;
+	return (char)tolower(_type) == 'k';
 }

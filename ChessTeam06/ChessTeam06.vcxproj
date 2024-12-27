@@ -127,16 +127,32 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClInclude Include="Bishop.h" />
+=======
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="EmptyPiece.h" />
+    <ClInclude Include="King.h" />
+>>>>>>> 6deb19a82bd93785524a0ebe47de4691bedbf4eb
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="Pipe.h" />
     <ClInclude Include="point.h" />
     <ClInclude Include="Rook.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <ClCompile Include="Bishop.cpp" />
+=======
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="King.cpp" />
+>>>>>>> 6deb19a82bd93785524a0ebe47de4691bedbf4eb
     <ClCompile Include="Piece.cpp" />
     <ClCompile Include="point.cpp" />
     <ClCompile Include="Rook.cpp" />
+    <ClCompile Include="Source.cpp" />
+    <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
