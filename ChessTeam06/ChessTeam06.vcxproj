@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8d55d11e-ace1-4f8d-8219-1200e3c16cf3}</ProjectGuid>
-    <RootNamespace>ChessTeam06</RootNamespace>
+    <ProjectGuid>{2892d8eb-a88f-48ca-bc7e-e9fdeaf99deb}</ProjectGuid>
+    <RootNamespace>ChessTeaM06</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -127,32 +127,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClInclude Include="Bishop.h" />
-=======
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="EmptyPiece.h" />
-    <ClInclude Include="King.h" />
->>>>>>> 6deb19a82bd93785524a0ebe47de4691bedbf4eb
-    <ClInclude Include="Piece.h" />
-    <ClInclude Include="Pipe.h" />
-    <ClInclude Include="point.h" />
-    <ClInclude Include="Rook.h" />
-    <ClInclude Include="stdafx.h" />
-    <ClInclude Include="targetver.h" />
+    <ClInclude Include="..\Bishop.h" />
+    <ClInclude Include="..\Piece.h" />
+    <ClInclude Include="..\point.h" />
+    <ClInclude Include="..\Queen.h" />
+    <ClInclude Include="..\Rook.h" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-    <ClCompile Include="Bishop.cpp" />
-=======
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="King.cpp" />
->>>>>>> 6deb19a82bd93785524a0ebe47de4691bedbf4eb
-    <ClCompile Include="Piece.cpp" />
-    <ClCompile Include="point.cpp" />
-    <ClCompile Include="Rook.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="stdafx.cpp" />
+    <ClCompile Include="..\Bishop.cpp" />
+    <ClCompile Include="..\Piece.cpp" />
+    <ClCompile Include="..\point.cpp" />
+    <ClCompile Include="..\Queen.cpp" />
+    <ClCompile Include="..\Rook.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
