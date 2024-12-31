@@ -1,5 +1,7 @@
 #include "Piece.h"
 #define EMPTY '#'
+#define BLACK true
+#define WHITE false
 
 Piece::Piece(int x, int y, char type, bool color): _point(Point(x, y)), _color(color)
 {
@@ -13,13 +15,13 @@ char Piece::getType() const
 
 void Piece::setType(char type)
 {
-	if (_color)
-	{
-		_type = (char)toupper(type);
-	}
-	else
+	if (_color == BLACK) // if the color is black (true), lower the char
 	{
 		_type = (char)tolower(type);
+	}
+	else // if the color is white (false), uppers the char
+	{
+		_type = (char)toupper(type);
 	}
 }
 

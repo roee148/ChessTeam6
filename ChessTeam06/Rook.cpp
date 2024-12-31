@@ -1,6 +1,9 @@
 #include "Rook.h"
 #include <math.h>
 
+//bool isRookPathEmpty() todo
+
+
 bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const
 {
     int destX = dest.getX();
@@ -8,12 +11,12 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
     int destY = dest.getY();
     int srcY = this->getY();
 
-    if (destX != srcX and destY != srcY)
+    if (destX != srcX and destY != srcY) // moving in different row and col
     {
         return false;
     }
 
-    if (destX == srcX)
+    if (destX == srcX) // moving in same [row, col]
     {
         if (destY > srcY)
         {
@@ -60,7 +63,7 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
                 }
             }
         }
-        return true;
+        
     }
-    // todo what to return here? compiler gives warning
+    return true;
 }
