@@ -2,8 +2,8 @@
 
 bool Queen::isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const
 {
-    Rook rook(getX(), getY(), getColor());
-    Bishop bishop(getX(), getY(), getColor());
+    Rook rook(getRow(), getCol(), getColor());
+    Bishop bishop(getRow(), getCol(), getColor());
 
     bool validAsRook = rook.isValidMovement(dest, board);
     bool validAsBishop = bishop.isValidMovement(dest, board);

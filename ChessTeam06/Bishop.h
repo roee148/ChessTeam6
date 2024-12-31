@@ -3,6 +3,6 @@
 class Bishop : public Piece
 {
 public:
-	Bishop(int x, int y, bool color) : Piece(x, y, 'b', color) {}
+	Bishop(int row, int col, bool color) : Piece(row, col, 'b', color) {}
 	bool isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const override;
 };

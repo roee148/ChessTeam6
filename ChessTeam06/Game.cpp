@@ -60,13 +60,13 @@ void Game::playGame()
 	{
 		gameBoard.printBoard();
 		coordinates = parseMsg(msgFromGraphics);
-		int x1 = coordinates[0];
-		int y1 = coordinates[1];
-		int x2 = coordinates[2];
-		int y2 = coordinates[3];
+		int colSrc = coordinates[0];
+		int rowSrc = coordinates[1];
+		int colDest = coordinates[2];
+		int rawDest = coordinates[3];
 		
 		//check the validity of the move
-		code returnCode = gameBoard.makeMove(x1, y1, x2, y2, _currentPlayer);
+		code returnCode = gameBoard.makeMove(rowSrc, colSrc, rawDest, colDest, _currentPlayer);
 		
 		//if the move is valid, switch the turn to the other player
 		if (returnCode == code::VALID || returnCode == code::CHECK)

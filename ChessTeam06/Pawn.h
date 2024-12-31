@@ -4,11 +4,11 @@ class Pawn : public Piece
 {
 public:
 
-	Pawn(int x, int y, bool color) : Piece(x, y, 'p', color) {}
+	Pawn(int row, int col, bool color) : Piece(row, col, 'p', color) {}
 
 	bool isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const override;
 
 private:
-	bool isFirstTurn = true;
+	bool _isFirstTurn = true;
 };
 

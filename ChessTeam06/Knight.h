@@ -3,6 +3,6 @@
 class Knight : public Piece
 {
 public:
-	Knight(int x, int y, bool color) : Piece(x, y, 'n', color) {}
+	Knight(int row, int col, bool color) : Piece(row, col, 'n', color) {}
 	bool isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const override;;
 };

@@ -2,19 +2,19 @@
 
 bool Knight::isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const
 {
-    int destX = dest.getX();
-    int srcX = this->getX();
-    int destY = dest.getY();
-    int srcY = this->getY();
+    int destCol = dest.getCol();
+    int srcCol = this->getCol();
+    int destRow = dest.getRow();
+    int srcRow = this->getRow();
 
-    if ((destX + 2 == srcX and destY + 1 == srcY) or
-        (destX + 2 == srcX and destY - 1 == srcY) or
-        (destX - 2 == srcX and destY + 1 == srcY) or
-        (destX - 2 == srcX and destY - 1 == srcY) or
-        (destX + 1 == srcX and destY + 2 == srcY) or
-        (destX + 1 == srcX and destY - 2 == srcY) or
-        (destX - 1 == srcX and destY + 2 == srcY) or
-        (destX - 1 == srcX and destY - 2 == srcY))
+    if ((destCol + 2 == srcCol and destRow + 1 == srcRow) or
+        (destCol + 2 == srcCol and destRow - 1 == srcRow) or
+        (destCol - 2 == srcCol and destRow + 1 == srcRow) or
+        (destCol - 2 == srcCol and destRow - 1 == srcRow) or
+        (destCol + 1 == srcCol and destRow + 2 == srcRow) or
+        (destCol + 1 == srcCol and destRow - 2 == srcRow) or
+        (destCol - 1 == srcCol and destRow + 2 == srcRow) or
+        (destCol - 1 == srcCol and destRow - 2 == srcRow))
     {
         return true;
     }

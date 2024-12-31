@@ -1,28 +1,25 @@
 #include "Rook.h"
 #include <math.h>
 
-//bool isRookPathEmpty() todo
-
-
 bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const
 {
-    int destX = dest.getX();
-    int srcX = this->getX();
-    int destY = dest.getY();
-    int srcY = this->getY();
+    int destCol = dest.getCol();
+    int srcCol = this->getCol();
+    int destRow = dest.getRow();
+    int srcRow = this->getRow();
 
-    if (destX != srcX and destY != srcY) // moving in different row and col
+    if (destCol != srcCol and destRow != srcRow) // moving in different row and col
     {
         return false;
     }
 
-    if (destX == srcX) // moving in same [row, col]
+    if (destCol == srcCol) // moving in same col
     {
-        if (destY > srcY)
+        if (destRow > srcRow)
         {
-            for (int i = srcY + 1; i < destY; i++)
+            for (int i = srcRow + 1; i < destRow; i++)
             {
-                if (!board[srcX][i]->isEmpty())
+                if (!board[srcCol][i]->isEmpty())
                 {
                     return false;
                 }
@@ -30,9 +27,9 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
         }
         else
         {
-            for (int i = srcY - 1; i > destY; i--)
+            for (int i = srcRow - 1; i > destRow; i--)
             {
-                if (!board[srcX][i]->isEmpty())
+                if (!board[srcCol][i]->isEmpty())
                 {
                     return false;
                 }
@@ -41,13 +38,13 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
         return true;
     }
 
-    if (destY == srcY)
+    if (destRow == srcRow)  // moving in same row
     {
-        if (destX > srcX)
+        if (destCol > srcCol)
         {
-            for (int i = srcX + 1; i < destX; i++)
+            for (int i = srcCol + 1; i < destCol; i++)
             {
-                if (!board[i][srcY]->isEmpty())
+                if (!board[i][srcRow]->isEmpty())
                 {
                     return false;
                 }
@@ -55,9 +52,9 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
         }
         else
         {
-            for (int i = srcX - 1; i > destX; i--)
+            for (int i = srcCol - 1; i > destCol; i--)
             {
-                if (!board[i][srcY]->isEmpty())
+                if (!board[i][srcRow]->isEmpty())
                 {
                     return false;
                 }

@@ -61,15 +61,15 @@ void Board::setPawns(int line, bool color)
 	_board[line][7] = new Pawn(line, 7, color);
 }
 
-code Board::makeMove(int x1, int y1, int x2, int y2, bool currentPlayer)
+code Board::makeMove(int rowSrc, int colSrc, int rowDest, int colDest, bool currentPlayer)
 {
-	/*if (x1 >= BOARD_SIZE || x2 >= BOARD_SIZE || y1 >= BOARD_SIZE || y2 >= BOARD_SIZE)
+	/*if (rowSrc >= BOARD_SIZE || colSrc >= BOARD_SIZE || rowDest >= BOARD_SIZE || colDest >= BOARD_SIZE)
 	{
 		return code::INVALID_INDEXES;
 	}*/
 
-	Piece* source = getPiece(x1, y1);
-	Piece* destination = getPiece(x2, y2);
+	Piece* source = getPiece(rowSrc, colSrc);
+	Piece* destination = getPiece(rowDest, colDest);
 
 	// if the source point is empty/not the turn of the current player
 	if (source->isEmpty() ||
@@ -85,7 +85,7 @@ code Board::makeMove(int x1, int y1, int x2, int y2, bool currentPlayer)
 	}
 
 	//if the point are identical (can't happen on frontend)
-	if (x1 == x2 && y1 == y2)
+	if (rowSrc == rowDest && colSrc == colDest)
 	{
 		return code::SRC_AND_DST_SAME;
 	}
@@ -124,34 +124,34 @@ void Board::printBoard()
 
 void Board::updateBoard(Piece* source, Piece* destination)
 {
-	int srcX = source->getX();
-	int srcY = source->getY();
-	int destX = destination->getX();
-	int destY = destination->getY();
+	int srcRow = source->getRow();
+	int srcCol = source->getCol();
+	int destRow = destination->getRow();
+	int destCol = destination->getCol();
 
-	source->setPoint(destX, destY);
-	_board[destX][destY] = source;
-	_board[srcX][srcY] = new EmptyPiece(srcX, srcY);
+	source->setPosition(destRow, destCol);
+	_board[destRow][destCol] = source;
+	_board[srcRow][srcCol] = new EmptyPiece(srcRow, srcCol);
 }
 
 
 bool Board::tryMoveAndCheck(Piece* source, Piece* destination) 
 {
-	int srcX = source->getX();
-	int srcY = source->getY();
-	int destX = destination->getX();
-	int destY = destination->getY();
+	int srcRow = source->getRow();
+	int srcCol = source->getCol();
+	int destRow = destination->getRow();
+	int destCol = destination->getCol();
 
 	updateBoard(source, destination);
 
-	if (isCheck(destination->getColor()))
+	if (isCheck(source->getColor()))
 	{
 		// Restore the board
-		source->setPoint(srcX, srcY);
-		delete _board[srcX][srcY]; // delete EmptyPiece
-		_board[srcX][srcY] = source;
-		destination->setPoint(destX, destY);
-		_board[destX][destY] = destination;
+		source->setPosition(srcRow, srcCol);
+		delete _board[srcRow][srcCol]; // delete EmptyPiece
+		_board[srcRow][srcCol] = source;
+		destination->setPosition(destRow, destCol);
+		_board[destRow][destCol] = destination;
 		return false;
 	}
 	// movement is valid
@@ -159,10 +159,9 @@ bool Board::tryMoveAndCheck(Piece* source, Piece* destination)
 	return true;
 }
 
-
-Piece* Board::getPiece(int x, int y) const
+Piece* Board::getPiece(int row, int col) const
 {
-	return _board[x][y];
+	return _board[row][col];
 }
 
 bool Board::isCheck(bool color) const

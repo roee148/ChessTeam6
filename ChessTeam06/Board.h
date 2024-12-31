@@ -7,7 +7,7 @@ class Board
 {
 public:
 	Board();
-	code makeMove(int x1, int y1, int x2, int y2, bool color);
+	code makeMove(int rowSrc, int colSrc, int rowDest, int colDest, bool currentPlayer);
 	void printBoard();
 	
 private:
@@ -17,7 +17,7 @@ private:
 	bool tryMoveAndCheck(Piece* source, Piece* destination);
 	Piece* locateKing(bool color) const;
 	bool isCheck(bool color) const;
-	Piece* getPiece(int x, int y) const;
+	Piece* getPiece(int row, int col) const;
 	void setPieces(int line, bool color);
 	void setPawns(int line, bool color);
 

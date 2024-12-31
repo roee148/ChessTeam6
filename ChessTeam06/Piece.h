@@ -7,24 +7,25 @@ class Piece
 protected:
 	char _type;
 	bool _color;
-	Point _point;
+	int _row;
+	int _col;
 
 public:
 	// Constructors
-	Piece(int x, int y, char type, bool color);
+	Piece(int row, int col, char type, bool color);
 
 	// Getters
 	char getType() const;
 	bool getColor() const;
-	int getX() const;
-	int getY() const;
-	bool isEmpty() const;
-	void setPoint(int x, int y);
+	int getCol() const;
+	int getRow() const;
+	void setPosition(int row, int col);
 
 
 	// Methods	
 	bool virtual isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const = 0;
-	bool isKing() const;
+	bool virtual isKing() const;
+	bool virtual isEmpty() const;
 
 protected:
 	void setType(char type);
@@ -35,7 +36,7 @@ enum code
 {
 	VALID,
 	CHECK,
-	EMPTY_SOURCE_POINT, //source point is empty/the piece in the source point is the oponent's piece
+	EMPTY_SOURCE_POINT, //source point is empty/the piece in the source point is the opponent's piece
 	OCCUPIED_DEST_POINT,
 	CHECK_ON_CURRENT_PLAYER,
 	INVALID_INDEXES,

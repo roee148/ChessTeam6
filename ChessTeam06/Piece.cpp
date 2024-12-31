@@ -3,7 +3,7 @@
 #define BLACK true
 #define WHITE false
 
-Piece::Piece(int x, int y, char type, bool color): _point(Point(x, y)), _color(color)
+Piece::Piece(int row, int col, char type, bool color): _row(row), _col(col), _color(color)
 {
 	setType(type);
 }
@@ -30,27 +30,28 @@ bool Piece::getColor() const
 	return _color;
 }
 
-int Piece::getX() const
+int Piece::getCol() const
 {
-	return _point.getX();
+	return _col;
 }
 
-int Piece::getY() const
+int Piece::getRow() const
 {
-	return _point.getY();
+	return _row;
 }
 
 bool Piece::isEmpty() const
 {
-	return _type == EMPTY;
+	return false;
 }
 
-void Piece::setPoint(int x, int y)
+void Piece::setPosition(int row, int col)
 {
-	_point = Point(x, y);
+	_row = row;
+	_col = col;
 }
  
 bool Piece::isKing() const
 {
-	return (char)tolower(_type) == 'k';
+	return false;
 }

@@ -4,20 +4,20 @@
 
 bool Bishop::isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const
 {
-    int destX = dest.getX();
-    int srcX = this->getX();
-    int destY = dest.getY();
-    int srcY = this->getY();
+    int destCol = dest.getCol();
+    int srcCol = this->getCol();
+    int destRow = dest.getRow();
+    int srcRow = this->getRow();
 
-    if (abs(destX - srcX) != abs(destY - srcY))
+    if (abs(destCol - srcCol) != abs(destRow - srcRow))
     {
         return false;
     }
 
-    int xDirection = (destX - srcX) / abs(destX - srcX);
-    int yDirection = (destY - srcY) / abs(destY - srcY);
+    int xDirection = (destCol - srcCol) / abs(destCol - srcCol);
+    int yDirection = (destRow - srcRow) / abs(destRow - srcRow);
 
-    for (int x = srcX + xDirection, y = srcY + yDirection; x != destX and y != destY; x += xDirection, y += yDirection)
+    for (int x = srcCol + xDirection, y = srcRow + yDirection; x != destCol and y != destRow; x += xDirection, y += yDirection)
     {
         if (!board[x][y]->isEmpty())
         {

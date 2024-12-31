@@ -5,6 +5,6 @@
 class Queen : public Piece
 {
 public:
-	Queen(int x, int y, bool color) : Piece(x, y, 'q', color) {}
+	Queen(int row, int col, bool color) : Piece(row, col, 'q', color) {}
 	bool isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const override;
 };

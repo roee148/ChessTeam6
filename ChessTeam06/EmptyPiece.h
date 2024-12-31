@@ -4,9 +4,9 @@ class EmptyPiece : public Piece
 {
 public:
 
-	EmptyPiece(int x, int y) : Piece(x, y, '#', 0) {} // color doesnt matter
+	EmptyPiece(int row, int col) : Piece(row, col, '#', false) {} // color doesnt matter
 
 	bool isValidMovement(const Piece& dest, const std::vector<std::vector<Piece*>>& board) const override { return false; }
-
+	bool isEmpty() const override { return true; }
 };
 
