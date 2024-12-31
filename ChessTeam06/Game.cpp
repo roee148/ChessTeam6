@@ -26,6 +26,7 @@ void Game::playGame()
 	bool isConnect = p.connect();
 	std::string ans;
 
+	//connect to frontend
 	while (!isConnect)
 	{
 		std::cout << "cant connect to graphics" << std::endl;
@@ -45,7 +46,8 @@ void Game::playGame()
 	}
 
 	char msgToGraphics[1024];
-	//strcpy_s(msgToGraphics, "rnbkqbnrpppppppp################################PPPPPPPPRNBKQBNR0"); // just example...
+	
+	//starting string
 	strcpy_s(msgToGraphics, "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr0"); // just example...
 	p.sendMessageToGraphics(msgToGraphics);   // send the board string
 
@@ -59,6 +61,8 @@ void Game::playGame()
 	while (msgFromGraphics != "quit")
 	{
 		gameBoard.printBoard();
+
+		//get the cordinates from the msg from graphics
 		coordinates = parseMsg(msgFromGraphics);
 		int colSrc = coordinates[0];
 		int rowSrc = coordinates[1];
@@ -77,15 +81,6 @@ void Game::playGame()
 		std::string strCode = std::to_string(returnCode);
 		strcpy_s(msgToGraphics, strCode.c_str()); // msgToGraphics should contain the result of the operation
 		
-
-		/*
-		// JUST FOR EREZ DEBUGGING 
-		int r = rand() % 10; // just for debugging......
-		msgToGraphics[0] = (char)(8 + '0');
-		msgToGraphics[1] = 0;
-		// JUST FOR EREZ DEBUGGING */
-
-
 		// return result to graphics		
 		p.sendMessageToGraphics(msgToGraphics);
 

@@ -19,7 +19,7 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
         {
             for (int i = srcRow + 1; i < destRow; i++)
             {
-                if (!board[srcCol][i]->isEmpty())
+                if (!board[i][srcCol]->isEmpty())
                 {
                     return false;
                 }
@@ -29,7 +29,7 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
         {
             for (int i = srcRow - 1; i > destRow; i--)
             {
-                if (!board[srcCol][i]->isEmpty())
+                if (!board[i][srcCol]->isEmpty())
                 {
                     return false;
                 }
@@ -44,7 +44,7 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
         {
             for (int i = srcCol + 1; i < destCol; i++)
             {
-                if (!board[i][srcRow]->isEmpty())
+                if (!board[srcRow][i]->isEmpty())
                 {
                     return false;
                 }
@@ -54,13 +54,13 @@ bool Rook::isValidMovement(const Piece& dest, const std::vector<std::vector<Piec
         {
             for (int i = srcCol - 1; i > destCol; i--)
             {
-                if (!board[i][srcRow]->isEmpty())
+                if (!board[srcRow][i]->isEmpty())
                 {
                     return false;
                 }
             }
         }
-        
+
     }
     return true;
 }

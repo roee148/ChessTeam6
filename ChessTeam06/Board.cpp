@@ -63,11 +63,6 @@ void Board::setPawns(int line, bool color)
 
 code Board::makeMove(int rowSrc, int colSrc, int rowDest, int colDest, bool currentPlayer)
 {
-	/*if (rowSrc >= BOARD_SIZE || colSrc >= BOARD_SIZE || rowDest >= BOARD_SIZE || colDest >= BOARD_SIZE)
-	{
-		return code::INVALID_INDEXES;
-	}*/
-
 	Piece* source = getPiece(rowSrc, colSrc);
 	Piece* destination = getPiece(rowDest, colDest);
 
@@ -78,35 +73,37 @@ code Board::makeMove(int rowSrc, int colSrc, int rowDest, int colDest, bool curr
 		return code::EMPTY_SOURCE_POINT;
 	}
 
-	//if the dest piece is the same as the source and is not empty (empty might have the same color)
+	//if the dest piece is the same color as the source and is not empty (empty might have the same color)
 	if (destination->getColor() == currentPlayer && !destination->isEmpty())
 	{
 		return code::OCCUPIED_DEST_POINT;
 	}
 
-	//if the point are identical (can't happen on frontend)
+	//if the point are identical
 	if (rowSrc == rowDest && colSrc == colDest)
 	{
 		return code::SRC_AND_DST_SAME;
 	}
 	
 	//if the movement is not valid
-
 	if (!source->isValidMovement(*destination, _board))
 	{
 		return code::INVALID_MOVEMENT;
 	}
 	
-	if (!tryMoveAndCheck(source, destination)) // make a move, check if check on myself, is yes move back
+	// make a move, check if check on myself, is yes move back
+	if (!tryMoveAndCheck(source, destination))
 	{
 		return code::CHECK_ON_CURRENT_PLAYER;
 	}
 
-	if (isCheck(!source->getColor())) // is check on opponent
+	// is check on opponent
+	if (isCheck(!source->getColor())) 
 	{
 		return code::CHECK;
 	}
 
+	//if there wasn't any error, the move is valid
 	return code::VALID;
 }
 
@@ -167,12 +164,14 @@ Piece* Board::getPiece(int row, int col) const
 bool Board::isCheck(bool color) const
 {
 	Piece* king = locateKing(color);
-
+	
+	//run through all the board pieces
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			Piece* currPiece = _board[i][j];
+			//if the current piece is the opponent's piece and it can move to the king theres chess
 			if (color != currPiece->getColor() &&
 				currPiece->isValidMovement(*king, _board))
 			{
@@ -185,10 +184,12 @@ bool Board::isCheck(bool color) const
 
 Piece* Board::locateKing(bool color) const
 {
+	//run through all the board pieces
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
+			//if the current piece is a king and its the same color as the color we got
 			Piece* tmpPiece = _board[i][j];
 			if (tmpPiece->isKing() && color == tmpPiece->getColor())
 			{

@@ -17,9 +17,9 @@ bool Bishop::isValidMovement(const Piece& dest, const std::vector<std::vector<Pi
     int xDirection = (destCol - srcCol) / abs(destCol - srcCol);
     int yDirection = (destRow - srcRow) / abs(destRow - srcRow);
 
-    for (int x = srcCol + xDirection, y = srcRow + yDirection; x != destCol and y != destRow; x += xDirection, y += yDirection)
+    for (int x = srcCol + xDirection, y = srcRow + yDirection; x != destCol or y != destRow; x += xDirection, y += yDirection)
     {
-        if (!board[x][y]->isEmpty())
+        if (!board[y][x]->isEmpty())
         {
             return false;
         }
