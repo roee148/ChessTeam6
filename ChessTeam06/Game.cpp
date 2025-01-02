@@ -4,25 +4,21 @@
 #include <string>
 #include <iostream>
 
-int* Game::parseMsg(std::string msg)
+void Game::parseMsg(const std::string& msg, int* coordinates) const
 {
-	int* indexes = new int[4]; //the msg built like this: a2a4
+	//the msg built like this: a2a4
 	//if char is letter (happens in indexes 0 and 2), subtract 'a' to get int
 	//if the char is a number (happens in indexes 1 and 3) subtract '0' to get int
 
-	//chess cordinates to board cordinates
-	indexes[0] = msg[0] - 'a';
-	indexes[1] = 8 - (msg[1] - '0');
-	indexes[2] = msg[2] - 'a';
-	indexes[3] = 8 - (msg[3] - '0');
-
-	return indexes;
+	//chess coordinates to board coordinates
+	coordinates[0] = msg[0] - 'a';
+	coordinates[1] = 8 - (msg[1] - '0');
+	coordinates[2] = msg[2] - 'a';
+	coordinates[3] = 8 - (msg[3] - '0');
 }
 
-void Game::playGame()
-{
+static bool connectToGraphics(Pipe& p) {
 	srand(time_t(NULL));
-	Pipe p;
 	bool isConnect = p.connect();
 	std::string ans;
 
@@ -41,20 +37,29 @@ void Game::playGame()
 		else
 		{
 			p.close();
-			return;
+			return false;
 		}
+	}
+	return true;
+}
+
+void Game::playGame()
+{
+	Pipe p;
+	if (!connectToGraphics(p))
+	{
+		return;
 	}
 
 	char msgToGraphics[1024];
 	
 	//starting string
-	strcpy_s(msgToGraphics, "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr0"); // just example...
-	p.sendMessageToGraphics(msgToGraphics);   // send the board string
+	strcpy_s(msgToGraphics, "RNBKQBNRPPPPPPPP################################pppppppprnbkqbnr0");
+	p.sendMessageToGraphics(msgToGraphics);
 
-	// get message from graphics
 	std::string msgFromGraphics = p.getMessageFromGraphics();
 
-	int* coordinates = nullptr;
+	int coordinates[4];
 
 	Board gameBoard;
 
@@ -62,18 +67,18 @@ void Game::playGame()
 	{
 		gameBoard.printBoard();
 
-		//get the cordinates from the msg from graphics
-		coordinates = parseMsg(msgFromGraphics);
+		//get the coordinates from the msg from graphics
+		parseMsg(msgFromGraphics, coordinates);
 		int colSrc = coordinates[0];
 		int rowSrc = coordinates[1];
 		int colDest = coordinates[2];
 		int rawDest = coordinates[3];
 		
 		//check the validity of the move
-		code returnCode = gameBoard.makeMove(rowSrc, colSrc, rawDest, colDest, _currentPlayer);
+		TurnResult returnCode = gameBoard.makeMove(rowSrc, colSrc, rawDest, colDest, _currentPlayer);
 		
 		//if the move is valid, switch the turn to the other player
-		if (returnCode == code::VALID || returnCode == code::CHECK)
+		if (returnCode == TurnResult::VALID || returnCode == TurnResult::CHECK)
 		{
 			switchTurns();
 		}

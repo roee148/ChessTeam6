@@ -5,10 +5,7 @@
 int main(void)
 {
 	Game chessGame;
-
 	chessGame.playGame();
-
-
 	return 0;
 }
 

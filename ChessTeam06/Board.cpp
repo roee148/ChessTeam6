@@ -6,13 +6,12 @@
 #include "Bishop.h"
 #include "Knight.h"
 #include "Queen.h"
-#define BLACK true
-#define WHITE false
-#define BOARD_SIZE 8
+#include "Defines.h"
+
 #include <iostream>
 
 Board::Board()
-	: _board(8, std::vector<Piece*>(8, nullptr))
+	: _board(BOARD_SIZE, std::vector<Piece*>(BOARD_SIZE, nullptr))
 { 
 	//set white pieces
 	setPieces(0, WHITE);
@@ -34,7 +33,17 @@ Board::Board()
 
 	//set black pieces
 	setPieces(7, BLACK);
+}
 
+Board::~Board()
+{
+	for (size_t i = 0; i < BOARD_SIZE; i++)
+	{
+		for (size_t j = 0; j < BOARD_SIZE; j++)
+		{
+			delete _board[i][j];
+		}
+	}
 }
 
 void Board::setPieces(int line, bool color)
@@ -51,63 +60,59 @@ void Board::setPieces(int line, bool color)
 
 void Board::setPawns(int line, bool color)
 {
-	_board[line][0] = new Pawn(line, 0, color);
-	_board[line][1] = new Pawn(line, 1, color);
-	_board[line][2] = new Pawn(line, 2, color);
-	_board[line][3] = new Pawn(line, 3, color);
-	_board[line][4] = new Pawn(line, 4, color);
-	_board[line][5] = new Pawn(line, 5, color);
-	_board[line][6] = new Pawn(line, 6, color);
-	_board[line][7] = new Pawn(line, 7, color);
+	for (int i = 0; i < BOARD_SIZE; i++)
+	{
+		_board[line][i] = new Pawn(line, i, color);
+	}
 }
 
-code Board::makeMove(int rowSrc, int colSrc, int rowDest, int colDest, bool currentPlayer)
+TurnResult Board::makeMove(int rowSrc, int colSrc, int rowDest, int colDest, bool currentPlayer)
 {
 	Piece* source = getPiece(rowSrc, colSrc);
 	Piece* destination = getPiece(rowDest, colDest);
 
-	// if the source point is empty/not the turn of the current player
+	// source point is empty/not the turn of the current player
 	if (source->isEmpty() ||
 		source->getColor() != currentPlayer)
 	{
-		return code::EMPTY_SOURCE_POINT;
+		return TurnResult::EMPTY_SOURCE_POINT;
 	}
 
-	//if the dest piece is the same color as the source and is not empty (empty might have the same color)
+	// dest piece is the same color as the source and is not empty (empty might have the same color)
 	if (destination->getColor() == currentPlayer && !destination->isEmpty())
 	{
-		return code::OCCUPIED_DEST_POINT;
+		return TurnResult::OCCUPIED_DEST_POINT;
 	}
 
-	//if the point are identical
+	// points are identical
 	if (rowSrc == rowDest && colSrc == colDest)
 	{
-		return code::SRC_AND_DST_SAME;
+		return TurnResult::SRC_AND_DST_SAME;
 	}
 	
-	//if the movement is not valid
+	// the movement is not valid
 	if (!source->isValidMovement(*destination, _board))
 	{
-		return code::INVALID_MOVEMENT;
+		return TurnResult::INVALID_MOVEMENT;
 	}
 	
-	// make a move, check if check on myself, is yes move back
+	// make a move, check if check on myself, if yes move back
 	if (!tryMoveAndCheck(source, destination))
 	{
-		return code::CHECK_ON_CURRENT_PLAYER;
+		return TurnResult::CHECK_ON_CURRENT_PLAYER;
 	}
 
 	// is check on opponent
 	if (isCheck(!source->getColor())) 
 	{
-		return code::CHECK;
+		return TurnResult::CHECK;
 	}
 
 	//if there wasn't any error, the move is valid
-	return code::VALID;
+	return TurnResult::VALID;
 }
 
-void Board::printBoard()
+void Board::printBoard() const
 {
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
@@ -165,13 +170,13 @@ bool Board::isCheck(bool color) const
 {
 	Piece* king = locateKing(color);
 	
-	//run through all the board pieces
+	// run through all the board pieces
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			Piece* currPiece = _board[i][j];
-			//if the current piece is the opponent's piece and it can move to the king theres chess
+			//if the current piece is the opponent's piece and it can move to the king there's a check
 			if (color != currPiece->getColor() &&
 				currPiece->isValidMovement(*king, _board))
 			{
@@ -184,12 +189,12 @@ bool Board::isCheck(bool color) const
 
 Piece* Board::locateKing(bool color) const
 {
-	//run through all the board pieces
+	// run through all the board pieces
 	for (int i = 0; i < BOARD_SIZE; i++)
 	{
 		for (int j = 0; j < BOARD_SIZE; j++)
 		{
-			//if the current piece is a king and its the same color as the color we got
+			// if the current piece is a king and its the same color as the color we got
 			Piece* tmpPiece = _board[i][j];
 			if (tmpPiece->isKing() && color == tmpPiece->getColor())
 			{
