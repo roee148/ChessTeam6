@@ -75,14 +75,20 @@ Solution: we searched on google the exact movement of those pieces, and     look
 
 Screenshot 1: The board at the start of the game.
  
+![alt text](https://github.com/roee148/ChessTeam06/tree/main/images_for_README/start.png?raw=true)
 
 
 
 
 
 
+Screenshot 2: check detection
 
-Screenshot 2: 
+![alt text](https://github.com/roee148/ChessTeam06/tree/main/images_for_README/chessDetection.png?raw=true)
+ 
+ 
+ 
+ 
  
 ## 🤝 Team Collaboration
 ✏️ Tell us about your experience working as a team:
